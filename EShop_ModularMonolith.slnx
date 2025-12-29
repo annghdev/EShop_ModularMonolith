@@ -1,1 +1,26 @@
-<Solution />
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/API/API.csproj" />
+    <Project Path="src/Aspire/Aspire.ApiService/Aspire.ApiService.csproj" />
+    <Project Path="src/Aspire/Aspire.AppHost/Aspire.AppHost.csproj" />
+    <Project Path="src/Aspire/Aspire.ServiceDefaults/Aspire.ServiceDefaults.csproj" />
+    <Project Path="src/Aspire/Aspire.Web/Aspire.Web.csproj" />
+    <Project Path="src/Common/Common.csproj" />
+    <Project Path="src/Contracts/Contracts.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/">
+    <Project Path="src/Catalog/Catalog.csproj" />
+    <Project Path="src/Inventory/Inventory.csproj" />
+    <Project Path="src/Ordering/Ordering.csproj" />
+    <Project Path="src/Payment/Payment.csproj" />
+    <Project Path="src/Pricing/Pricing.csproj" />
+    <Project Path="src/Promotion/Promotion.csproj" />
+    <Project Path="src/Shipping/Shipping.csproj" />
+  </Folder>
+  <Folder Name="/tests/" />
+</Solution>

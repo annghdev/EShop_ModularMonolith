@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Application\Abstraction\" />
+    <Folder Include="Application\PipelineBehaviors\" />
+    <Folder Include="Domain\" />
+    <Folder Include="Infrastructure\Interceptors\" />
+    <Folder Include="Application\Models\" />
+    <Folder Include="Utilities\" />
+  </ItemGroup>
+
+</Project>
