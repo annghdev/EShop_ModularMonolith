@@ -6,10 +6,10 @@
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/API/API.csproj" />
-    <Project Path="src/Aspire/Aspire.ApiService/Aspire.ApiService.csproj" />
     <Project Path="src/Aspire/Aspire.AppHost/Aspire.AppHost.csproj" />
     <Project Path="src/Aspire/Aspire.ServiceDefaults/Aspire.ServiceDefaults.csproj" />
     <Project Path="src/Aspire/Aspire.Web/Aspire.Web.csproj" />
+    <Project Path="src/Auth/Auth.csproj" />
     <Project Path="src/Common/Common.csproj" />
     <Project Path="src/Contracts/Contracts.csproj" />
   </Folder>
@@ -20,7 +20,9 @@
     <Project Path="src/Payment/Payment.csproj" />
     <Project Path="src/Pricing/Pricing.csproj" />
     <Project Path="src/Promotion/Promotion.csproj" />
+    <Project Path="src/Report/Report.csproj" />
     <Project Path="src/Shipping/Shipping.csproj" />
+    <Project Path="src/User/User.csproj" />
   </Folder>
   <Folder Name="/tests/" />
 </Solution>
