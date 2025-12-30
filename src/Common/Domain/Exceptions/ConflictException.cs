@@ -1,5 +1,4 @@
-﻿namespace Common.Domain.Exceptions;
+﻿namespace Common;
 
-public class ConflictException
-{
-}
+public class ConflictException(string operation)
+    : DomainException($"{operation} is conflict", 409);

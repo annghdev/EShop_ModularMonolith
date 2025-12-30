@@ -1,5 +1,6 @@
-﻿namespace Common.Domain.Exceptions;
+﻿namespace Common;
 
-public class DomainException
+public class DomainException(string message, int statusCode = 400) : Exception(message)
 {
+    public int StatusCode => statusCode;
 }
