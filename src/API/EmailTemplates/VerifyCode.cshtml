@@ -1,0 +1,23 @@
+﻿@model dynamic
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Xác minh tài khoản</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color:#f7f7f7; padding:20px;">
+    <div style="background-color:#fff; padding:20px; border-radius:10px; max-width:500px; margin:auto;">
+        <h2 style="color:#2c3e50;">Xin chào @Model.Name!</h2>
+        <p>Cảm ơn bạn đã sử dụng dịch vụ của <strong>MyApp</strong>.</p>
+        <p>Dưới đây là mã xác minh của bạn:</p>
+        <h1 style="background:#2c3e50; color:#fff; padding:10px; text-align:center; letter-spacing:3px;">
+            @Model.VerifyCode
+        </h1>
+        <p>Mã có hiệu lực trong <strong>@Model.ExpireMinutes phút</strong>.</p>
+        <p>Nếu bạn không yêu cầu mã này, hãy bỏ qua email này.</p>
+        <br />
+        <p>Trân trọng,<br /><b>Đội ngũ MyApp</b></p>
+    </div>
+</body>
+</html>

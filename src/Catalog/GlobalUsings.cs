@@ -1,6 +1,7 @@
 ﻿global using MediatR;
 global using Microsoft.EntityFrameworkCore;
 global using Newtonsoft.Json;
+global using Kernel;
 global using Kernel.Domain;
 global using Kernel.Application;
 global using Kernel.Infrastructure;

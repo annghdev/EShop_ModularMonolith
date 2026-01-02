@@ -8,10 +8,12 @@ public class Slug : BaseValueObject
 {
     public string Value { get; }
 
+    private Slug() { }
+
     public Slug(string input)
     {
         if (string.IsNullOrWhiteSpace(input))
-            throw new FormatException("Input slug không hợp lệ");
+            throw new InputFormatException("Input slug không hợp lệ");
 
         // 1. Chuyển về chữ thường trước
         string str = input.ToLowerInvariant();

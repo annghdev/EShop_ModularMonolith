@@ -15,7 +15,7 @@ public class Dimensions : BaseValueObject
     public Dimensions(decimal width, decimal height, decimal depth, decimal weight)
     {
         if (width <= 0 || height <= 0 || depth <= 0 || weight <= 0)
-            throw new ArgumentException("Dimensions must be greater than 0");
+            throw new DomainException("Dimensions must be greater than 0");
 
         Width = width;
         Height = height;

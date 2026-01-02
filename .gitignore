@@ -365,3 +365,4 @@ FodyWeavers.xsd
 .context/
 .cursor/
 .docs/
+/src/API/appsettings.Development.json

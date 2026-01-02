@@ -6,5 +6,4 @@ public abstract class AuditableEntity : BaseEntity, IUserTracking, ISoftDelete
     public DateTimeOffset? UpdatedAt { get; set; }
     public string? UpdatedBy { get; set; }
     public bool IsDeleted { get; set; }
-    public DateTimeOffset? DeletedAt { get; set; }
 }

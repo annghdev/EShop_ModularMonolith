@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\API\API.csproj" />
+    <ProjectReference Include="..\..\BlazorAdmin\BlazorAdmin.csproj" />
     <ProjectReference Include="..\Aspire.Web\Aspire.Web.csproj" />
   </ItemGroup>
 

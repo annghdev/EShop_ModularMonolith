@@ -11,25 +11,21 @@ public class Email : BaseValueObject
 
     public string Value { get; }
 
-    private Email(string value)
+    private Email() { }
+
+    public Email(string value)
     {
         // 1. Validation logic ngay tại constructor
         if (string.IsNullOrWhiteSpace(value))
-            throw new FormatException("Email không được để trống.");
+            throw new InputFormatException("Email không được để trống.");
 
         if (value.Length > 255)
-            throw new FormatException("Email quá dài.");
+            throw new InputFormatException("Email quá dài.");
 
         if (!EmailRegex.IsMatch(value))
-            throw new FormatException("Định dạng Email không hợp lệ.");
+            throw new InputFormatException("Định dạng Email không hợp lệ.");
 
         Value = value.ToLowerInvariant(); // Chuẩn hóa dữ liệu
-    }
-
-    // Static factory method giúp code tường minh hơn
-    public static Email Create(string email)
-    {
-        return new Email(email);
     }
 
     // 2. Override GetEqualityComponents để so sánh bằng giá trị

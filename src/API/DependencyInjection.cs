@@ -1,9 +1,17 @@
-﻿namespace API;
+﻿using API.Services;
+using Kernel.Application;
+using Microsoft.EntityFrameworkCore;
+
+namespace API;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddModules(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddHttpContextAccessor();
+
+        services.AddScoped<ICurrentUser, CurrentUserService>();
+
         return services;
     }
 }

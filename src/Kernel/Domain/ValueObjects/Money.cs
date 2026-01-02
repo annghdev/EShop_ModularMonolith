@@ -7,8 +7,11 @@ public class Money : BaseValueObject
 
     private Money() { } // For EF Core
 
-    public Money(decimal amount, string currency = "VND")
+    public Money(decimal amount, string? currency = "VND")
     {
+        if (string.IsNullOrEmpty(currency))
+            currency = "VND";
+
         if (amount < 0)
             throw new MoneyException("The amount must not be negative.");
 

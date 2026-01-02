@@ -4,16 +4,18 @@ public class ImageUrl : BaseValueObject
 {
     public string Path { get; }
 
-    private ImageUrl(string path)
+    private ImageUrl() { }
+
+    public ImageUrl(string path)
     {
         if (string.IsNullOrWhiteSpace(path))
-            throw new FormatException("Đường dẫn ảnh không được để trống.");
+            throw new InputFormatException("Đường dẫn ảnh không được để trống.");
 
         // 1. Kiểm tra định dạng URI hợp lệ
         if (!Uri.TryCreate(path, UriKind.Absolute, out var uriResult) ||
             (uriResult.Scheme != Uri.UriSchemeHttp && uriResult.Scheme != Uri.UriSchemeHttps))
         {
-            throw new FormatException("Định dạng URL ảnh không hợp lệ.");
+            throw new InputFormatException("Định dạng URL ảnh không hợp lệ.");
         }
 
         // 2. Tùy chọn: Kiểm tra phần mở rộng (extension)
@@ -22,12 +24,10 @@ public class ImageUrl : BaseValueObject
             path.EndsWith(ext, StringComparison.OrdinalIgnoreCase));
 
         if (!hasValidExtension)
-            throw new FormatException("Định dạng file ảnh không được hỗ trợ.");
+            throw new InputFormatException("Định dạng file ảnh không được hỗ trợ.");
 
         Path = path;
     }
-
-    public static ImageUrl Create(string path) => new ImageUrl(path);
 
     protected override IEnumerable<object?> GetEqualityComponents()
     {

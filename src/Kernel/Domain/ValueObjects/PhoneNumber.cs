@@ -11,23 +11,20 @@ public class PhoneNumber : BaseValueObject
 
     public string Value { get; }
 
-    private PhoneNumber(string value)
+    private PhoneNumber() { }
+
+    public PhoneNumber(string value)
     {
         if (string.IsNullOrWhiteSpace(value))
-            throw new FormatException("Số điện thoại không được để trống.");
+            throw new InputFormatException("Số điện thoại không được để trống.");
 
         // Chuẩn hóa: Loại bỏ khoảng trắng, dấu chấm, dấu gạch ngang
         var normalizedValue = value.Replace(" ", "").Replace("-", "").Replace(".", "");
 
         if (!PhoneRegex.IsMatch(normalizedValue))
-            throw new FormatException("Định dạng số điện thoại không hợp lệ.");
+            throw new InputFormatException("Định dạng số điện thoại không hợp lệ.");
 
         Value = normalizedValue;
-    }
-
-    public static PhoneNumber Create(string value)
-    {
-        return new PhoneNumber(value);
     }
 
     // So sánh dựa trên giá trị chuỗi đã chuẩn hóa

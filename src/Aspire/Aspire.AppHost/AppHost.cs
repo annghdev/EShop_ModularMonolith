@@ -9,21 +9,19 @@ var postgres = builder.AddPostgres("postgres-eshop", pgUsername, pgPassword)
         //.WithDataVolume(isReadOnly: false)
         .WithPgWeb(pgAdmin => pgAdmin.WithHostPort(5050));
 
-var productDb = postgres.AddDatabase("productdb");
+var catalogDb = postgres.AddDatabase("catalogdb");
 
 var api = builder.AddProject<Projects.API>("api")
     .WithHttpHealthCheck("/health")
-    .WithReference(productDb)
-        .WaitFor(productDb)
+    .WithReference(catalogDb)
+        .WaitFor(catalogDb)
     .WithReference(elasticSearch)
         .WaitFor(elasticSearch);
 
-builder.AddProject<Projects.Aspire_Web>("webfrontend")
+builder.AddProject<Projects.BlazorAdmin>("webadmin")
     .WithExternalHttpEndpoints()
     .WithHttpHealthCheck("/health")
     .WithReference(api)
     .WaitFor(api);
-
-builder.AddProject<Projects.API>("api");
 
 builder.Build().Run();
