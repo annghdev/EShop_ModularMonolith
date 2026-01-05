@@ -6,7 +6,7 @@ public interface IRepository<T>
     void Add(T entity);
     void Update(T entity);
     void Remove(T entity);
-    Task<T> GetAggregate(Guid id, bool changeTracking = true);
+    Task<T> LoadFullAggregate(Guid id, bool changeTracking = true);
     Task<bool> CheckExistsAsync(Guid id);
     Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken = default);
 }

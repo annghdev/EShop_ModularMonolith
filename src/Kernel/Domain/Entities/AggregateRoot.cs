@@ -4,7 +4,6 @@ public abstract class AggregateRoot : AuditableEntity, IAggregate
 {
     public long Version { get; private set; }
 
-
     private readonly List<DomainEvent> _events = [];
     public IReadOnlyCollection<DomainEvent> Events => _events.AsReadOnly();
 

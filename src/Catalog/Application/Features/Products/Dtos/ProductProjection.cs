@@ -8,7 +8,7 @@ public sealed class ProductProjection
     public string Slug { get; set; } = string.Empty;
     public string Sku { get; set; } = string.Empty;
     public decimal Price { get; set; }
-    public string Currency { get; set; } = "USD";
+    public string Currency { get; set; } = "VND";
     public string CategoryId { get; set; } = string.Empty;
     public string CategoryName { get; set; } = string.Empty;
     public string BrandId { get; set; } = string.Empty;
@@ -34,5 +34,5 @@ public sealed class ProductVariantProjection
     public string Name { get; set; } = string.Empty;
     public string Sku { get; set; } = string.Empty;
     public decimal Price { get; set; }
-    public string Currency { get; set; } = "USD";
+    public string Currency { get; set; } = "VND";
 }

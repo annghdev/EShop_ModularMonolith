@@ -26,7 +26,7 @@ public class GetProductDetails
     {
         public async Task<ProductDto> Handle(Query query, CancellationToken cancellationToken)
         {
-            var product = await uow.Products.GetAggregate(query.Id);
+            var product = await uow.Products.LoadFullAggregate(query.Id, changeTracking: false);
 
             return mapper.Map<ProductDto>(product);
         }

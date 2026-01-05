@@ -6,8 +6,8 @@ var builder = DistributedApplication.CreateBuilder(args);
 var elasticSearch = builder.AddElasticsearch("elasticsearch");
     //.WithDataVolume(isReadOnly: false);
 
-var pgUsername = builder.AddParameter("eshop-username", secret: true);
-var pgPassword = builder.AddParameter("eshop-password", secret: true);
+var pgUsername = builder.AddParameter("db-username", secret: true);
+var pgPassword = builder.AddParameter("db-password", secret: true);
 
 var postgres = builder.AddPostgres("postgres-eshop", pgUsername, pgPassword)
     //.WithDataVolume(isReadOnly: false)

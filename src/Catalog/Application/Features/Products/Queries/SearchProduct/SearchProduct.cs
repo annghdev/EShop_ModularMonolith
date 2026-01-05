@@ -227,7 +227,6 @@ public class SearchProduct
             })
             .WithTags("Products")
             .WithName("GetAllProducts");
-
         }
     }
 }

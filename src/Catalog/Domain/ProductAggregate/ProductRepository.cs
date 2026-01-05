@@ -2,5 +2,5 @@
 
 public interface IProductRepository : IRepository<Product>
 {
-    Task<Product> GetAggregateBySlug(string slug);
+    Task<Product> LoadFullAggregateBySlug(string slug);
 }

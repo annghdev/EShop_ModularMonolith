@@ -29,7 +29,7 @@ public abstract class BaseRepository<TEntity, TDbContext>(TDbContext db) : IRepo
         return await dbSet.AnyAsync(x => x.Id == id);
     }
 
-    public abstract Task<TEntity> GetAggregate(Guid id, bool changeTracking = true);
+    public abstract Task<TEntity> LoadFullAggregate(Guid id, bool changeTracking = true);
 
     public abstract Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default);
 }

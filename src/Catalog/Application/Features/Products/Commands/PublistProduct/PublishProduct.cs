@@ -16,7 +16,7 @@ public class PublishProduct
     {
         public async Task Handle(Command command, CancellationToken cancellationToken)
         {
-            var product = await uow.Products.GetAggregate(command.Id);
+            var product = await uow.Products.LoadFullAggregate(command.Id);
 
             product.Publish();
 
