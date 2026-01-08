@@ -7,8 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="IntegrationEvents\" />
+    <Folder Include="IntegrationEvents\CatalogEvents\" />
     <Folder Include="IntegrationQueries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.5.0" />
   </ItemGroup>
 
 </Project>
