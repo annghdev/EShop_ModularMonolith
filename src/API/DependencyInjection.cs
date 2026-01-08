@@ -1,4 +1,6 @@
 ﻿using API.Services;
+using Catalog;
+using Inventory;
 using Kernel.Application;
 using Kernel.Extensions;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +18,10 @@ public static class DependencyInjection
         services.AddScoped<ICurrentUser, CurrentUserService>();
 
         services.AddInfrasServices(configuration);
+
+        //services.AddInfrasDB(configuration);
+        services.AddCatalogContainer(configuration);
+        services.AddInventoryContainer(configuration);
 
         return services;
     }

@@ -22,9 +22,9 @@ public static class DependencyInjection
             //options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
         });
 
+        services.AddScoped<CatalogSeeder>();
         services.AddScoped<ICatalogUnitOfWork, CatalogUnitOfWork>();
         services.AddScoped<IProductRepository, ProductRepository>();
-        services.AddScoped<CatalogSeeder>();
 
         return services;
     }

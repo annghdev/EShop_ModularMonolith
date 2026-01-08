@@ -1,7 +1,7 @@
 using API;
 using Catalog;
 using Catalog.Infrastructure;
-using Catalog.Infrastructure.EFCore;
+using Inventory.Infrastructure;
 using Kernel.Extensions;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,10 +15,8 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
-builder.Services.AddServices(builder.Configuration);
 
-//builder.Services.AddInfrasDB(builder.Configuration);
-builder.Services.AddCatalogContainer(builder.Configuration);
+builder.Services.AddServices(builder.Configuration);
 
 var app = builder.Build();
 
@@ -50,11 +48,19 @@ app.MapEndpoints(typeof(Catalog.DependencyInjection).Assembly);
 using var scope = app.Services.CreateScope();
 try
 {
+    // Migrate Catalog
     var catalogContext = scope.ServiceProvider.GetRequiredService<CatalogDbContext>();
     await catalogContext.Database.MigrateAsync();
 
     var seeder = scope.ServiceProvider.GetRequiredService<CatalogSeeder>();
     await seeder.SeedAsync();
+
+    Console.WriteLine("Catalog database migrations applied and data seeded successfully.");
+
+
+    // Migrate Inventory
+    var inventoryContext = scope.ServiceProvider.GetRequiredService<InventoryDbContext>();
+    await inventoryContext.Database.MigrateAsync();
 
     Console.WriteLine("Catalog database migrations applied and data seeded successfully.");
 }
