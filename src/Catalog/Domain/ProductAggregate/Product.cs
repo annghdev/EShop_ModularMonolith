@@ -218,10 +218,10 @@ public class Product : AggregateRoot
 
     public void ValidateCategoryDefaultAttributes()
     {
-        foreach (var defaultAttr in Category!.DefaultAttributes)
+        foreach (var defaultAttr in Category!.GetAllDefaultAttributesFromHierarchy())
         {
             if (!_attributes.Any(a => a.AttributeId == defaultAttr.AttributeId))
-                throw new DomainException("Product not contains attribute not defined in category");
+                throw new DomainException($"Product missing required attribute '{defaultAttr.Attribute.Name}' from category hierarchy");
         }
     }
 
