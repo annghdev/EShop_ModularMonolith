@@ -258,6 +258,9 @@ public class Product : AggregateRoot
 
     public void Discard()
     {
+        if (Status != ProductStatus.Draft)
+            throw new DomainException("Cannot discard product after publish");
+
         Status = ProductStatus.Discarded;
 
         // add event here

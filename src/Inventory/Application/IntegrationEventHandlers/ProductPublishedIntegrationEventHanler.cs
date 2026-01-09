@@ -1,4 +1,4 @@
-﻿using Contracts.IntegrationEvents.CatalogEvents;
+using Contracts.IntegrationEvents.CatalogEvents;
 using Inventory.Domain;
 
 namespace Inventory.Application;

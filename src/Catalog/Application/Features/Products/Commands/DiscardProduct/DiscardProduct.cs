@@ -28,7 +28,7 @@ public class DiscardProduct
     {
         public void Map(IEndpointRouteBuilder app)
         {
-            app.MapDelete("api/discard/{id:guid}", async (Guid id, ISender sender) =>
+            app.MapDelete("api/products/{id:guid}/discard", async (Guid id, ISender sender) =>
             {
                 await sender.Send(new Command(id));
             })
