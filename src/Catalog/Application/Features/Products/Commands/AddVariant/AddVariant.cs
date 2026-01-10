@@ -1,5 +1,4 @@
 using Catalog.Domain;
-using Catalog.Domain.Products.Events;
 using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -145,7 +144,9 @@ public class AddVariant
 
                 await sender.Send(new Command(request));
                 return Results.Accepted();
-            });
+            })
+                .WithName("AddVariant")
+                .WithTags("Products");
         }
     }
 }

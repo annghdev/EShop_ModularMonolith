@@ -1,9 +1,6 @@
 ### Create Product - Shirt (Fashion)
 PUT http://localhost:5000/api/products/publish/dddddddd-dddd-dddd-dddd-dddddddddd13
 Content-Type: application/json
-{
-
-}
 ###
 
 ### Publish Product - Smartphone (Device)

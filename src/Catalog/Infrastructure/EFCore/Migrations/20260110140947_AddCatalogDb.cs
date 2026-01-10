@@ -269,7 +269,7 @@ namespace Catalog.Infrastructure.EFCore.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    Sku = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    Sku = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     OverrideCost = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: true),
                     OverrideCostCurrency = table.Column<string>(type: "character varying(3)", maxLength: 3, nullable: true, defaultValue: "VND"),
                     OverridePrice = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: true),
@@ -280,11 +280,7 @@ namespace Catalog.Infrastructure.EFCore.Migrations
                     OverrideWeight = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: true),
                     MainImage = table.Column<string>(type: "text", nullable: true),
                     ProductId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    CreatedBy = table.Column<string>(type: "text", nullable: false),
-                    UpdatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "text", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -321,7 +317,7 @@ namespace Catalog.Infrastructure.EFCore.Migrations
                         column: x => x.ProductAttributeId,
                         principalTable: "ProductAttributes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_VariantAttributeValues_Variants_VariantId",
                         column: x => x.VariantId,

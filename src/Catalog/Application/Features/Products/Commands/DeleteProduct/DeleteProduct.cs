@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Catalog.Infrastructure;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace Catalog.Application;
+namespace Catalog.Application.Features.Products.Commands.DeleteProduct;
 
-public class DiscardProduct
+public class DeleteProduct
 {
     public record Command(Guid Id) : ICommand
     {
@@ -18,7 +19,7 @@ public class DiscardProduct
         {
             var product = await uow.Products.LoadFullAggregate(command.Id);
 
-            product.Discard();
+            product.MarkAsDeleted();
 
             await uow.CommitAsync(cancellationToken);
         }
@@ -28,11 +29,12 @@ public class DiscardProduct
     {
         public void Map(IEndpointRouteBuilder app)
         {
-            app.MapDelete("api/products/{id:guid}/discard", async (Guid id, ISender sender) =>
+            app.MapDelete("api/products/{id:guid}", async (Guid id, ISender sender) =>
             {
                 await sender.Send(new Command(id));
+                return Results.NoContent();
             })
-                .WithName("DiscardProduct")
+                .WithName("DeleteProduct")
                 .WithTags("Products");
         }
     }

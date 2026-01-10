@@ -22,7 +22,7 @@ public class VariantAttributeValueConfiguration : IEntityTypeConfiguration<Varia
         builder.HasOne(vav => vav.ProductAttribute)
             .WithMany()
             .HasForeignKey(vav => vav.ProductAttributeId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
 
         #endregion
 

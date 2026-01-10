@@ -263,6 +263,12 @@ public class Product : AggregateRoot
 
         // add event here
     }
+
+    public void MarkAsDeleted()
+    {
+        IsDeleted = true;
+        AddEvent(new ProductDeletedEvent(Id));
+    }
 }
 
 public enum ProductStatus

@@ -830,8 +830,8 @@ namespace Catalog.Infrastructure.EFCore.Migrations
 
                             b1.Property<string>("Value")
                                 .IsRequired()
-                                .HasMaxLength(20)
-                                .HasColumnType("character varying(20)")
+                                .HasMaxLength(50)
+                                .HasColumnType("character varying(50)")
                                 .HasColumnName("Sku");
 
                             b1.HasKey("VariantId");
@@ -863,7 +863,7 @@ namespace Catalog.Infrastructure.EFCore.Migrations
                     b.HasOne("Catalog.Domain.ProductAttribute", "ProductAttribute")
                         .WithMany()
                         .HasForeignKey("ProductAttributeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Catalog.Domain.AttributeValue", "Value")

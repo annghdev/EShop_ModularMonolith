@@ -1,4 +1,4 @@
-﻿using Catalog.Domain;
+using Catalog.Domain;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Catalog.Infrastructure.EFCore.Configurations;
@@ -17,31 +17,36 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         {
             slug.Property(m => m.Value)
                  .HasColumnName("Slug")
-                 .HasMaxLength(200);
+                 .HasMaxLength(200)
+                 .IsRequired();
         });
 
         builder.OwnsOne(p => p.Price, money =>
         {
             money.Property(m => m.Amount)
                  .HasColumnName("Price")
-                 .HasPrecision(18, 2);
+                 .HasPrecision(18, 2)
+                 .IsRequired();
 
             money.Property(m => m.Currency)
                  .HasColumnName("PriceCurrency")
                  .HasMaxLength(3)
-                 .HasDefaultValue("VND");
+                 .HasDefaultValue("VND")
+                 .IsRequired();
         });
 
         builder.OwnsOne(p => p.Cost, money =>
         {
             money.Property(m => m.Amount)
                  .HasColumnName("Cost")
-                 .HasPrecision(18, 2);
+                 .HasPrecision(18, 2)
+                 .IsRequired();
 
             money.Property(m => m.Currency)
                  .HasColumnName("CostCurrency")
                  .HasMaxLength(3)
-                 .HasDefaultValue("VND");
+                 .HasDefaultValue("VND")
+                 .IsRequired();
         });
 
         builder.OwnsOne(p => p.Dimensions, dim =>

@@ -239,7 +239,9 @@ public class DraftProduct
             {
                 await sender.Send(new Command(request));
                 return Results.Accepted();
-            });
+            })
+                .WithName("DraftProduct")
+                .WithTags("Products");
         }
     }
 
