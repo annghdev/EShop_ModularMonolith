@@ -8,7 +8,7 @@ public class PublishProduct
 {
     public record Command(Guid Id) : ICommand
     {
-        public IEnumerable<string> CacheKeysToInvalidate => ["product_all"];
+        public IEnumerable<string> CacheKeysToInvalidate => ["product_all", $"product_{Id}"];
         public IEnumerable<string> CacheKeyPrefix => ["product"];
     }
 
@@ -34,7 +34,9 @@ public class PublishProduct
             {
                 await sender.Send(new Command(id));
                 return Results.Ok();
-            });
+            })
+                .WithName("PublishProduct")
+                .WithTags("Products");
         }
     }
 }

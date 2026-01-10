@@ -1,6 +1,5 @@
 using Catalog.Domain;
-using Catalog.Domain.ProductAggregate.Events;
-using Catalog.Domain.Products.Events;
+using Elastic.Clients.Elasticsearch;
 using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -24,7 +23,7 @@ public class UpdateVariant
 
     public record Command(Request Request) : ICommand
     {
-        public IEnumerable<string> CacheKeysToInvalidate => ["product_all"];
+        public IEnumerable<string> CacheKeysToInvalidate => ["product_all", $"product_{Request.ProductId}"];
         public IEnumerable<string> CacheKeyPrefix => ["product"];
     }
 
@@ -168,7 +167,9 @@ public class UpdateVariant
 
                 await sender.Send(new Command(request));
                 return Results.Accepted();
-            });
+            })
+                .WithName("UpdateVariant")
+                .WithTags("Products");
         }
     }
 }

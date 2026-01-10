@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Catalog.Infrastructure.EFCore.Migrations
 {
     [DbContext(typeof(CatalogDbContext))]
-    [Migration("20260109035103_AddCatalogDb")]
+    [Migration("20260110140947_AddCatalogDb")]
     partial class AddCatalogDb
     {
         /// <inheritdoc />
@@ -385,13 +385,6 @@ namespace Catalog.Infrastructure.EFCore.Migrations
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -399,12 +392,6 @@ namespace Catalog.Infrastructure.EFCore.Migrations
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uuid");
-
-                    b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -846,8 +833,8 @@ namespace Catalog.Infrastructure.EFCore.Migrations
 
                             b1.Property<string>("Value")
                                 .IsRequired()
-                                .HasMaxLength(20)
-                                .HasColumnType("character varying(20)")
+                                .HasMaxLength(50)
+                                .HasColumnType("character varying(50)")
                                 .HasColumnName("Sku");
 
                             b1.HasKey("VariantId");
@@ -879,7 +866,7 @@ namespace Catalog.Infrastructure.EFCore.Migrations
                     b.HasOne("Catalog.Domain.ProductAttribute", "ProductAttribute")
                         .WithMany()
                         .HasForeignKey("ProductAttributeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Catalog.Domain.AttributeValue", "Value")

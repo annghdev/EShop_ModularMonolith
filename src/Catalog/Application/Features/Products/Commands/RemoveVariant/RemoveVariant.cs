@@ -67,7 +67,9 @@ public class RemoveVariant
                 var request = new Request(productId, variantId);
                 await sender.Send(new Command(request));
                 return Results.NoContent();
-            });
+            })
+                .WithName("RemoveVariant")
+                .WithTags("Products");
         }
     }
 }

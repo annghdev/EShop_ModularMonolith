@@ -1,9 +1,11 @@
 ### Create Product - Shirt (Fashion)
 PUT http://localhost:5000/api/products/publish/dddddddd-dddd-dddd-dddd-dddddddddd13
 Content-Type: application/json
-{
+###
 
-}
+### Delete Product - Shirt (Fashion)
+DELETE http://localhost:5000/api/products/dddddddd-dddd-dddd-dddd-dddddddddd13
+Content-Type: application/json
 ###
 
 ### Publish Product - Smartphone (Device)

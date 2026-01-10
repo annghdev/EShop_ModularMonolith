@@ -15,7 +15,8 @@ public class VariantConfiguration : IEntityTypeConfiguration<Variant>
         {
             sku.Property(m => m.Value)
                  .HasColumnName("Sku")
-                 .HasMaxLength(20);
+                 .HasMaxLength(50)
+                 .IsRequired();
         });
 
         builder.OwnsOne(v => v.OverridePrice, money =>
