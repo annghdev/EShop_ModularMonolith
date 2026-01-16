@@ -4,7 +4,7 @@
 [![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-10.0-green.svg)](https://dotnet.microsoft.com/apps/aspnet)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-Dự án **E-Shop Modular Monolith** là một hệ thống thương mại điện tử toàn diện được thiết kế để bán tất cả loại sản phẩm với các biến thể và thuộc tính đa dạng. Dự án được xây dựng theo kiến trúc **Modular Monolith** hiện đại, kết hợp với **Domain Driven Design (DDD)** và **Event-Driven Architecture** để đảm bảo tính mở rộng, bảo trì, sẵn sàng nâng cấp các thành phần cần thiết thành microservices.
+Dự án **E-Shop Modular Monolith** là một hệ thống thương mại điện tử được thiết kế để bán tất cả loại sản phẩm với các biến thể và thuộc tính đa dạng. Dự án được xây dựng theo kiến trúc **Modular Monolith** hiện đại, kết hợp với **Domain Driven Design (DDD)** và **Event-Driven Architecture** để đảm bảo tính mở rộng, bảo trì, sẵn sàng nâng cấp các thành phần cần thiết thành microservices.
 
 ## Mục lục
 
@@ -16,7 +16,7 @@ Dự án **E-Shop Modular Monolith** là một hệ thống thương mại đi�
 - [Link Demo](#demo)
 - [Hình ảnh mẫu](#hình-ảnh-mẫu)
 
-### Tính năng chính
+## Tính năng chính
 
 -  **Quản lý sản phẩm**: Hỗ trợ sản phẩm với nhiều biến thể và thuộc tính
 -  **Quản lý người dùng**: Hệ thống xác thực và phân quyền
@@ -61,20 +61,25 @@ Dự án **E-Shop Modular Monolith** là một hệ thống thương mại đi�
 
 ```
 📁 src/
-├── API/                    # Host chính (ASP.NET Core)
+├── API/                    # API Gateway (ASP.NET Core)
 ├── Aspire/                 # Cài đặt môi trường tài nguyên hạ tầng, điều phối ứng dụng và quản lý tập trung
-├── BlazorAdmin/            # Frontend quản lý cho Admin
+├── Auth/                   # Xác thực / Phân quyền
+├── BlazorAdmin/            # Frontend quản trị cho Admin
 ├── Modules/                # Các module nghiệp vụ
-│   ├── Identity/           # Quản lý người dùng, chứng thực và phân quyền
 │   ├── Catalog/            # Quản lý sản phẩm
-│   ├── Sales/              # Core module, quản lý quy trình bán hàng.
-│   ├── Inventory/          # Xử lý tồn kho
-│   ├── Pricing/            # Xử lý giá bán và khuyến mãi
-│   └── Report/             # Thống kê và báo cáo
-├── Shared/                 # Chia sẻ chung giữa các module
-│   ├── Kernel/             # Core abstractions và khung thư viện
-│   └── Contracts/          # Public DTOs và Events
-📁 Tests/                  # Unit & Integration Tests
+│   ├── Inventory/          # Quản lý kho
+│   ├── Orders/             # Xử lý đơn hàng
+│   ├── Payment/            # Xử lý thanh toán
+│   ├── Pricing/            # Quản lý giá, coupon và khuyến mãi
+│   ├── Report/             # Thống kê và báo cáo
+│   ├── Shipping/           # Quản lý giao hàng
+│   ├── ShoppingCart/       # Quản lý giỏ hàng
+│   └── Users/              # Quản lý người dùng
+├── Shared/                 # Chia sẻ giữa các module
+│   ├── Contracts/          # DTOs công khai và Events
+│   ├── Infrastructure/     # Hạ tầng chung (EF Core, Messaging, Caching ...)
+│   └── Kernel/             # Abstractions cốt lõi, thư viện framework
+📁 Tests/                   # Unit & Integration Tests
 ```
 
 **Lợi ích:**
@@ -115,19 +120,22 @@ Mỗi module tuân theo nguyên tắc **Clean Architecture**:
 
 | Module | Trách nhiệm | Database |
 |--------|-------------|----------|
-| **Identity** | Quản lý người dùng, chứng thực và phân quyền | IdentityDb |
-| **Catalog** | Quản lý sản phẩm, danh mục, thương hiệu và bộ sưu tập| CatalogDb |
-| **Inventory** | Quản lý kho và số lượng tồn sản phẩm | InventoryDb |
-| **Sales** | Quản lý giỏ hàng, đơn hàng, thanh toán và giao hàng | SalesDb |
-| **Pricing** | Quản lý chi phí, giá, phiếu ưu đãi và chương trình khuyến mãi | PricingDb |
-| **Report** | Thống kê và báo cáo doanh thu | - |
+| **Catalog** | Quản lý sản phẩm, danh mục & thương hiệu | CatalogDb |
+| **Inventory** | Quản lý tồn kho | InventoryDb |
+| **Orders** | Quy trình đơn hàng | OrderDb |
+| **Payment** | Giao dịch thanh toán | PaymentDb |
+| **Shipping** | Giao hàng | ShippingDb |
+| **ShoppingCart** | Quản lý giỏ hàng | ShoppingCartDb |
+| **Pricing** | Log thay đổi giá, Chiến dịch khuyến mãi, Coupon | PricingDb |
+| **Report** | Báo cáo doanh thu, Phân tích | ReportDb |
 
 ### Shared Components
 
 | Component | Mục đích |
 |-----------|----------|
-| **Kernel** | Chia sẽ cốt lõi, dịch vụ chung, tiện ích và cấu hình chung |
-| **Contracts** | Chia sẻ DTOs, Integration Events, Queries công khai giữa các module |
+| **Contracts** | DTOs, Integration Events, Command và Queries |
+| **Kernel** | Base classes, abstractions, extensions, tiện ích |
+| **Infrastructure** | Caching, File Storage, Notification, EventBus, EF Base classes |
 
 ## Hướng dẫn cài đặt và chạy dự án
 
@@ -165,6 +173,10 @@ Chọn Aspire.AppHost làm startup project và Run
 
 ### Database Schema
 ![Database Schema](docs/images/database-schema.png)
+
+### Aspire Dashboard
+![Aspire Dashboard](assets/aspire-dashboard.png)
+![Aspire Dashboard Table](assets/aspire-dashboard-table.png)
 
 ---
 

@@ -76,7 +76,7 @@ The **E-Shop Modular Monolith** project is a comprehensive e-commerce system des
 │   ├── Shipping/			# Shipping management
 │   ├── ShoppingCart/		# Shopping cart management
 │   └── Users/				# Users management
-├── BuildingBlocks/         # Shared between modules
+├── Shared/					# Shared between modules
 │   ├── Contracts/          # Public DTOs and Events
 │   ├── Infrastructure/     # Common infrastructure (EF Core, Messaging, Caching ...)
 │   └── Kernel/             # Core abstractions, framework library
@@ -120,19 +120,22 @@ Each module follows **Clean Architecture** principles:
 
 | Module | Responsibility | Database |
 |--------|----------------|----------|
-| **Identity** | User Management<br/>Authentication<br/>Role-based Access | IdentityDb |
-| **Catalog** | Product Management<br/>Categories & Brands | CatalogDb |
-| **Inventory** | Warehouse Management<br/>Stock Management | InventoryDb |
-| **Sales** | Cart Management<br/>Order Process<br/>Delivery<br/>Payment transaction | SalesDb |
-| **Pricing** | Price&Cost History<br/>Promotion Campaigns<br/>Coupon | PricingDb |
-| **Report** | Revenue report <br/> Analysis | - |
+| **Catalog** | Product Management, Categories & Brands | CatalogDb |
+| **Inventory** | Stock Management | InventoryDb |
+| **Orders** | Order Process | OrderDb |
+| **Payment** | Payment transaction | PaymentDb |
+| **Shipping** | Delivery | ShippingDb |
+| **ShoppingCart** | Cart Management | ShoppingCartDb |
+| **Pricing** | Price change log, Promotion Campaigns, Coupon | PricingDb |
+| **Report** | Revenue report, Analysis | ReportDb |
 
 ### Shared Components
 
 | Component | Purpose |
 |-----------|---------|
-| **Kernel** | Base classes, abstractions, shared infrastructure, utilities |
-| **Contracts** | DTOs, Integration Events, Queries |
+| **Contracts** | DTOs, Integration Events, Command and Queries |
+| **Kernel** | Base classes, abstractions, extensions, utilities |
+| **Infrastructure** | Caching, File Storage, Notification, EventBus, EF Base classes|
 
 ## Installation & Setup Guide
 
@@ -171,6 +174,10 @@ Select Aspire.AppHost as the startup project and Run
 
 ### Database Schema
 ![Database Schema](docs/images/database-schema.png)
+
+### Aspire Dashboard
+![Aspire Dashboard](assets/aspire-dashboard.png)
+![Aspire Dashboard Table](assets/aspire-dashboard-table.png)
 
 ---
 

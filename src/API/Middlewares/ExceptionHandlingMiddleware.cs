@@ -1,3 +1,4 @@
+using Contracts;
 using FluentValidation;
 using Kernel.Domain;
 using Microsoft.AspNetCore.Mvc;
@@ -37,6 +38,8 @@ public class ExceptionHandlingMiddleware
             Instance = context.TraceIdentifier,
             Type = "about:blank"
         };
+
+        var response = new ApiResponse();
 
         switch (exception)
         {
