@@ -25,6 +25,7 @@ var inventoryDb = postgres.AddDatabase("inventorydb");
 var pricingDb = postgres.AddDatabase("pricingdb");
 var shoppingCartDb = postgres.AddDatabase("shoppingcartdb");
 var ordersDb = postgres.AddDatabase("ordersdb");
+var paymentDb = postgres.AddDatabase("paymentdb");
 
 var api = builder.AddProject<Projects.API>("api")
     .WithHttpHealthCheck("/health")
@@ -42,6 +43,8 @@ var api = builder.AddProject<Projects.API>("api")
         .WaitFor(shoppingCartDb)
     .WithReference(ordersDb)
         .WaitFor(ordersDb)
+    .WithReference(paymentDb)
+        .WaitFor(paymentDb)
     //.WithReference(elasticSearch)
     //    .WaitFor(elasticSearch)
     .WithReference(rabbitMq)

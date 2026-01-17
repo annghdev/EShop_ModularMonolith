@@ -11,6 +11,7 @@ using ShoppingCart.Infrastructure;
 using Kernel.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Orders.Infrastructure;
+using Payment.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -119,6 +120,15 @@ try
     await ordersSeeder.SeedAsync();
 
     Console.WriteLine("Orders database migrations applied and data seeded successfully.");
+
+    // Migrate Payment
+    var paymentContext = scope.ServiceProvider.GetRequiredService<PaymentDbContext>();
+    await paymentContext.Database.MigrateAsync();
+
+    var paymentSeeder = scope.ServiceProvider.GetRequiredService<PaymentSeeder>();
+    await paymentSeeder.SeedAsync();
+
+    Console.WriteLine("Payment database migrations applied and data seeded successfully.");
 }
 catch (Exception ex)
 {
